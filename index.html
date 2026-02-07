@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거대돼지고양이의 방 - Personal Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sidebar-bg: #eaddb4;
+            --bg-start: #bed5ff;
+            --bg-end: #7296ff;
+            --gradient-angle: 180deg;
+            --marquee-bg: #000080;
+            --border-color: #000;
+            --win-blue: #000080;
+            --win-grey: #c0c0c0;
+            
+            /* Typography Variables */
+            --main-font: 'Gulim', '굴림', 'DotGothic16', 'Nanum Gothic Coding', monospace;
+            --main-font-size: 12px;
+            --main-letter-spacing: -0.02em;
+            --main-line-height: 1.4;
+        }
+        
+        * {
+            -webkit-font-smoothing: none !important;
+            -moz-osx-font-smoothing: none !important;
+            font-smooth: never !important;
+            text-rendering: optimizeSpeed !important;
+            image-rendering: pixelated;
+        }
+
+        @keyframes bg-hue-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        #bg-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: var(--bg-start);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='300' height='300' viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='stipple' width='4' height='4' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='1' cy='1' r='0.8' fill='white' fill-opacity='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Cg opacity='0.7'%3E%3Cpath d='M50 10L62 38H90L68 56L76 84L50 66L24 84L32 56L10 38H38L50 10Z' fill='url(%23stipple)'/%3E%3Cpath d='M200 150L208 170H230L212 182L218 202L200 190L182 202L188 182L170 170H192L200 150Z' fill='url(%23stipple)'/%3E%3Cpath d='M100 220L115 255H150L122 277L132 312L100 290L68 312L78 277L50 255H85L100 220Z' fill='url(%23stipple)'/%3E%3Cpath d='M250 40L256 55H272L260 64L264 79L250 70L236 79L240 64L228 55H244L250 40Z' fill='url(%23stipple)'/%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(var(--gradient-angle), var(--bg-start) 0%, var(--bg-end) 50%, var(--bg-start) 100%);
+            background-attachment: fixed;
+            background-size: 300px 300px, 100% 100%;
+        }
+
+        #bg-fixed.auto-animate {
+            animation: bg-hue-rotate 30s linear infinite;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--main-font);
+            font-size: var(--main-font-size);
+            color: #000;
+            line-height: var(--main-line-height);
+            letter-spacing: var(--main-letter-spacing);
+            background: transparent;
+        }
+
+        h1, h2, h3, button, input, textarea, select {
+            font-family: var(--main-font) !important;
+            font-size: inherit;
+        }
+
+        .sidebar-pattern {
+            background-color: var(--sidebar-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 10l2 2h-4l2-2zm0 20l2-2h-4l2 2zm10-10l-2 2v-4l2 2zM10 20l2 2v-4l2 2z' fill='%23000' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .pixel-text { font-family: var(--main-font) !important; }
+        .counter-led { background: #000; color: #0f0; padding: 1px 4px; border: 1px solid #555; display: inline-flex; font-family: monospace !important; }
+        .scroll-box { height: 110px; overflow-y: scroll; border: 1px solid #000; background: #fff; padding: 3px; color: #000; }
+        .marquee-area { background: var(--marquee-bg); color: #fff; padding: 2px; text-align: center; border: 1px solid #000; }
+        
+        /* Web Clap Retro Style */
+        .web-clap-container {
+            background-color: #e6f3ff;
+            border: 1px solid #84a2c4;
+            padding: 20px;
+            box-shadow: inset 1px 1px 0px white;
+        }
+        .web-clap-inner-box {
+            border: 1px solid #84a2c4;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .web-clap-btn {
+            background: #c0c0c0;
+            border-top: 2px solid white;
+            border-left: 2px solid white;
+            border-bottom: 2px solid #808080;
+            border-right: 2px solid #808080;
+            color: #000;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            active: border-top: 2px solid #808080;
+            active: border-left: 2px solid #808080;
+            active: border-bottom: 2px solid white;
+            active: border-right: 2px solid white;
+        }
+        .web-clap-btn:active {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            padding: 9px 15px 7px 17px;
+        }
+
+        .retro-window { border: 1px solid #000; box-shadow: 2px 2px 0px #000; color: #000; }
+        .admin-label { font-size: 11px; font-weight: bold; margin-bottom: 2px; display: block; color: #000; }
+        .admin-input { border: 1px solid #888; font-size: 12px; padding: 2px; width: 100%; margin-bottom: 8px; color: #000; background: #fff; }
+
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+          display: inline-block;
+          animation: marquee 15s linear infinite;
+        }
+
+        /* Custom Retro Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 16px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #dfdfdf;
+          box-shadow: inset 1px 1px #000;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #c0c0c0;
+          border-top: 2px solid #fff;
+          border-left: 2px solid #fff;
+          border-right: 2px solid #808080;
+          border-bottom: 2px solid #808080;
+        }
+        .custom-scrollbar::-webkit-scrollbar-button {
+          background: #c0c0c0;
+          border-top: 1px solid #fff;
+          border-left: 1px solid #fff;
+          border-right: 1px solid #808080;
+          border-bottom: 1px solid #808080;
+          height: 16px;
+          display: block;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom": "https://esm.sh/react-dom@^19.2.4",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="bg-fixed"></div>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

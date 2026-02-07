@@ -1,0 +1,7 @@
+{
+  "name": "Nostalgic Archive 200X",
+  "description": "A personal record-keeping application inspired by early 2000s Japanese subculture web aesthetics and yachiyo.net.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
